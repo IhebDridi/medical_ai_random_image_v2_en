@@ -69,17 +69,13 @@ def main():
         image_path = get_images(skin_color,gender)
         print('In Chat page: ',image_path)
         with st.container():
-                st.title("🤖 Medizinisch-diagnostische Assistentin")
-                #col1, col2 = st.columns([1, 1]) #making two columns one for image upload and one for camera input
-                st.subheader("Diagnostizieren Sie Ihren Hautzustand mit dem Medizinischen Assistenten", divider="gray")
                  #this is a placeholder for image upload
                 st.session_state["saved_image"]=image_path  #update state.saved_image with image path
                 
                 with st.status("Bild hochladen, bitte warten.."):
-                    st.write("Senden von Daten an Agent..")
+                    st.write("Daten senden")
                     initialize(image_path)  #Pass the image path during initialization
                 
-                st.subheader("Schildern Sie dem Assistenten Ihre Situation. Sie können auch einen Termin bei unserem Arzt buchen", divider="grey")
                 decision() #this loads the chat and buttons
         chat_page()
         save_state_json()
