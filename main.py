@@ -70,6 +70,8 @@ def main():
         print('In Chat page: ',image_path)
         with st.container():
                  #this is a placeholder for image upload
+                st.title('Bild und Chat')
+
                 st.session_state["saved_image"]=image_path  #update state.saved_image with image path
                 
                 with st.status("Bild hochladen, bitte warten.."):
