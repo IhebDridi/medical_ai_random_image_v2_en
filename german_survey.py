@@ -25,15 +25,6 @@ def survey():
     with st.form(key="my_form"):
         st.markdown("Bitte geben Sie Ihre ID ein")
         name = st.text_input("ID", value=st.session_state["survey"].get("ID", ""))
-        #age = st.number_input("Alter", value=st.session_state["survey"].get("age", 18), min_value=0, max_value=100)
-       # age = st.number_input("Alter", value=st.session_state["survey"].get("age", 18), min_value=0, max_value=100)
-
-        gender = st.radio("Geschlecht", ["Männlich", "Weiblich", "Divers", "Keine Angabe"],
-                          index=0 if st.session_state["survey"].get("gender", "Männlich") == "Männlich" else 1)
-
-        # Abfrage nach Hautfarbe
-        skin_color = st.radio("Hautfarbe", ["Weiß", "Schwarz"],
-                              index=0 if st.session_state["survey"].get("skin_color", "Weiß") == "Weiß" else 1)
 
 
         submit_button = st.form_submit_button("Absenden")
@@ -46,8 +37,8 @@ def survey():
         
         else:
             st.session_state["survey"]["name"] = name
-            st.session_state["survey"]["gender"] = gender
-            st.session_state["survey"]["skin_color"] = skin_color
+            #st.session_state["survey"]["gender"] = gender
+            #st.session_state["survey"]["skin_color"] = skin_color
             st.session_state["page"] = "chat"
             st.success("Vielen Dank für Ihre Antworten!")
             st.write("### Ihre Auswahl:")

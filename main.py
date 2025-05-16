@@ -62,11 +62,8 @@ def main():
         save_state_json()
     elif st.session_state["page"] == "chat":
         survey_data = st.session_state.get("survey", {})
-        skin_color = survey_data.get("skin_color", "default")
-        gender=survey_data.get("gender", "o")
-        print(skin_color)  # Assuming "skin_color" is the key for the skin color data
-        print(f"skin: {skin_color} and gender: {gender}")
-        image_path = get_images(skin_color,gender)
+        image_path="skin_images/05ec667cfd8a73d9d51b341af2ca9dc1.jpg"
+
         print('In Chat page: ',image_path)
         with st.container():
                  #this is a placeholder for image upload
