@@ -32,7 +32,7 @@ def survey():
                           index=0 if st.session_state["survey"].get("gender", "Männlich") == "Männlich" else 1)
 
         # Abfrage nach Hautfarbe
-        skin_color = st.radio("Skin Color", ["Weiß", "Schwarz"],
+        skin_color = st.radio("Hautfarbe", ["Weiß", "Schwarz"],
                               index=0 if st.session_state["survey"].get("skin_color", "Weiß") == "Weiß" else 1)
 
 
