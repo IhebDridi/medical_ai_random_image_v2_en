@@ -24,19 +24,20 @@ def survey():
 
     with st.form(key="my_form"):
         st.markdown("Bitte geben Sie Ihre ID ein")
-        name = st.text_input("ID", value=st.session_state["survey"].get("ID", ""))
+        uuid = st.text_input("ID", value=st.session_state["survey"].get("ID", ""))
 
 
         submit_button = st.form_submit_button("Absenden")
 
     if submit_button:
         
-        if name == "":
+        if uuid == "":
             st.error("Bitte geben Sie Ihre ID ein.")
 
         
         else:
-            st.session_state["survey"]["name"] = name
+            st.session_state['uuid']=uuid
+            st.session_state["survey"]["uuid"] = uuid
             #st.session_state["survey"]["gender"] = gender
             #st.session_state["survey"]["skin_color"] = skin_color
             st.session_state["page"] = "chat"

@@ -50,7 +50,6 @@ def decision():
         print("Button Clicked")
         print(f"You decided for: {st.session_state['button_clicked']}")
         st.write(f"You decided for: {st.session_state['button_clicked']}")
-        time.sleep(1)
         st.session_state["page"] = "thanks"
         # had to add rerun() to make the page change. Otherwise it only worked after clicking a button twice -> TODO: find out why and fix
         st.experimental_rerun()
