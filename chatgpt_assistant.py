@@ -9,7 +9,7 @@ class ChatGPTAssistant:
         pass
 
     def process_data(self, data):
-        response = client.chat.completions.create(model="gpt-4-turbo",
+        response = client.chat.completions.create(model="gpt-3.5-turbo",
         messages=[
             #{"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Please return the following text exactly as it is: {data}"}])
