@@ -14,25 +14,25 @@ def survey():
     st.title("Umfrage")
 
     options_final = [
-      "Starke Ablehnung",  "Ablehnung", "Neutral",  "Zustimmung", "Starke Zustimmung"
+      "Strongly disagree",  "disagree", "Neutral",  "Agree", "Strongly agree"
 
              ]
 
     #st.subheader("Fragebogen", divider='gray')
-    st.markdown("Bitte machen Sie die folgenden Angaben zu Ihrer Person.")
+    st.markdown("Please provide the following personal details.")
     
 
     with st.form(key="my_form"):
-        st.markdown("Bitte geben Sie Ihre ID ein")
+        st.markdown("Please enter your ID")
         uuid = st.text_input("ID", value=st.session_state["survey"].get("ID", ""))
 
 
-        submit_button = st.form_submit_button("Absenden")
+        submit_button = st.form_submit_button("Submit")
 
     if submit_button:
         
         if uuid == "":
-            st.error("Bitte geben Sie Ihre ID ein.")
+            st.error("Please enter your ID.")
 
         
         else:
@@ -41,8 +41,8 @@ def survey():
             #st.session_state["survey"]["gender"] = gender
             #st.session_state["survey"]["skin_color"] = skin_color
             st.session_state["page"] = "chat"
-            st.success("Vielen Dank für Ihre Antworten!")
-            st.write("### Ihre Auswahl:")
+            st.success("Thank you very much for your answers!")
+            st.write("### Your selection:")
             st.session_state["page"] = "chat"
             print('Survey Data: ',st.session_state["survey"] )
             st.rerun()

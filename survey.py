@@ -7,7 +7,7 @@ def submit_survey():
     st.session_state["survey_completed"] = True
     st.session_state["tipi_scores"] = calculate_scores(st.session_state)
     st.session_state["page"] = "chat"
-
+g
 
 def survey():
     if "survey" not in st.session_state:

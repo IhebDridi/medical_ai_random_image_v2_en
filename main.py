@@ -8,7 +8,7 @@ import uuid
 from utils import clean_latex_formatting, save_state_json
 from welcome import welcome_page
 #from survey import survey
-from german_survey import survey
+from english_survey import survey
 from chat import chat_page
 from images import get_images
 from decision_popover import decision
@@ -67,12 +67,12 @@ def main():
         print('In Chat page: ',image_path)
         with st.container():
                  #this is a placeholder for image upload
-                st.title('Bild und Chat')
+                st.title('Image and chat')
 
                 st.session_state["saved_image"]=image_path  #update state.saved_image with image path
                 
-                with st.status("Bild hochladen, bitte warten.."):
-                    st.write("Daten senden")
+                with st.status("Uploading image, please wait."):
+                    st.write("Sending data")
                     initialize(image_path)  #Pass the image path during initialization
                 
                 decision() #this loads the chat and buttons

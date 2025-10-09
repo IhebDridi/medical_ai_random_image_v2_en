@@ -17,4 +17,4 @@ class ChatGPTAssistant:
 
     def send_data(self, data):
         processed_data = self.process_data(data)
-        print(f"Dies ist dir Rückgabe von ChatGPT: {processed_data}")
+        print(f"This is your return from ChatGPT.: {processed_data}")
