@@ -11,7 +11,7 @@ def survey():
     if "survey" not in st.session_state:
         st.session_state["survey"] = {}
 
-    st.title("Umfrage")
+    st.title("Survey")
 
     options_final = [
       "Strongly disagree",  "disagree", "Neutral",  "Agree", "Strongly agree"
