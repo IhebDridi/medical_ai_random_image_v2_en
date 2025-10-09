@@ -30,18 +30,19 @@ class Sciebo:
 
         file_name = os.path.basename(file_path)
         file_extension = os.path.splitext(file_path)[1]
-        sciebo_url = f"{cls.SCIEBO_IMAGE_BASEURL}r_vc_{uuid}{file_extension}"
+        # ✅ Ensure trailing slash before adding filename
+        sciebo_url = f"{cls.SCIEBO_IMAGE_BASEURL.rstrip('/')}/r_vc_{uuid}{file_extension}"
 
         try:
-            
             with open(file_path, "rb") as file:
                 print("UUID of Image: ",uuid)
                 print("Sciebo URL of Image: ",sciebo_url)
+                # ✅ Use data= instead of files= for WebDAV PUT
                 response = requests.put(
-        sciebo_url,
-        data=file,  # Use 'files' instead of 'data'
-        auth=(cls.SCIEBO_USERNAME, cls.SCIEBO_PASSWORD),
-    )
+                    sciebo_url,
+                    data=file,
+                    auth=(cls.SCIEBO_USERNAME, cls.SCIEBO_PASSWORD),
+                )
 
             if response.status_code in [201, 204]:
                 pass
@@ -67,20 +68,22 @@ class Sciebo:
         try:
             # Convert session state to JSON
             # Upload to Sciebo
-            sciebo_url = f"{cls.SCIEBO_STATE_BASEURL}r_vc_{json_file_name}"
+            # ✅ Ensure trailing slash before adding filename
+            sciebo_url = f"{cls.SCIEBO_STATE_BASEURL.rstrip('/')}/r_vc_{json_file_name}"
             with open(json_file_path, "rb") as file:
                 print("UUID of State: ",uuid)
                 print("Sciebo URL of State: ",sciebo_url)
+                # ✅ Use data= instead of files=
                 response = requests.put(
-        sciebo_url,
-        files={"file": file},  # Use 'files' instead of 'data'
-        auth=(cls.SCIEBO_USERNAME, cls.SCIEBO_PASSWORD),
-    )
+                    sciebo_url,
+                    data=file,
+                    auth=(cls.SCIEBO_USERNAME, cls.SCIEBO_PASSWORD),
+                )
 
             if response.status_code in [201, 204]:
                 pass
             else:
-                st.error(f"❌ Failed session: {response.status_code} {response}")
+                st.error(f"❌ Failed session: {response.status_code} {response.text}")
 
         except Exception as e:
-            st.error(f"⚠️ Error ession state: {str(e)}")
+            st.error(f"⚠️ Error session state: {str(e)}")
