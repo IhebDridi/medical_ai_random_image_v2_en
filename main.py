@@ -60,13 +60,7 @@ def main():
     elif st.session_state["page"] == "survey":
         survey()
         save_state_json()
-
-    
     elif st.session_state["page"] == "chat":
-        if "assistant" not in st.session_state:
-            from chatgpt_assistant import ChatGPTAssistant
-            st.session_state.assistant = ChatGPTAssistant()
-
         survey_data = st.session_state.get("survey", {})
         image_path="skin_images/05ec667cfd8a73d9d51b341af2ca9dc1.jpg"
 

@@ -9,7 +9,7 @@ class ChatGPTAssistant:
         pass
 
     def process_data(self, data):
-        response = client.chat.completions.create(model="gpt-3.5-turbo",
+        response = client.chat.completions.create(model="gpt-4-turbo",
         messages=[
             #{"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": f"Please return the following text exactly as it is: {data}"}])
@@ -17,8 +17,4 @@ class ChatGPTAssistant:
 
     def send_data(self, data):
         processed_data = self.process_data(data)
-        print(f"Dies ist dir Rückgabe von ChatGPT: {processed_data}")
-
-    def chat(self, data):
-        # alias for process_data to match chat_page() usage
-        return self.process_data(data)
+        print(f"This is your return from ChatGPT.: {processed_data}")
