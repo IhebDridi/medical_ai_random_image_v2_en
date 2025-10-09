@@ -18,3 +18,7 @@ class ChatGPTAssistant:
     def send_data(self, data):
         processed_data = self.process_data(data)
         print(f"Dies ist dir Rückgabe von ChatGPT: {processed_data}")
+
+    def chat(self, data):
+        # alias for process_data to match chat_page() usage
+        return self.process_data(data)
