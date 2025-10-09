@@ -70,6 +70,18 @@ class Sciebo:
             # Upload to Sciebo
             # ✅ Ensure trailing slash before adding filename
             sciebo_url = f"{cls.SCIEBO_STATE_BASEURL.rstrip('/')}/r_vc_{json_file_name}"
+            print("=== Debug Info ===")
+            print("Username:", cls.SCIEBO_USERNAME)
+            print("Password set?", bool(cls.SCIEBO_PASSWORD))
+            print("File path exists?", os.path.exists(json_file_path))
+            print("File path:", json_file_path)
+            print("Uploading to URL:", sciebo_url)
+
+
+
+
+
+
             with open(json_file_path, "rb") as file:
                 print("UUID of State: ",uuid)
                 print("Sciebo URL of State: ",sciebo_url)
@@ -79,6 +91,10 @@ class Sciebo:
                     data=file,
                     auth=(cls.SCIEBO_USERNAME, cls.SCIEBO_PASSWORD),
                 )
+            print("Response status code:", response.status_code)
+            print("Response text:", response.text)
+
+
 
             if response.status_code in [201, 204]:
                 pass
