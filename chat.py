@@ -1,5 +1,8 @@
 import streamlit as st    
 import time 
+from chatgpt_assistant import ChatGPTAssistant
+import streamlit as st
+
 
 #@st.dialog("Sind Sie sicher?")
 def appointment_dialog():
@@ -31,6 +34,9 @@ def get_assistant_response():
     return response
 
 def chat_page(): 
+    if "assistant" not in st.session_state:
+        st.session_state.assistant = ChatGPTAssistant()
+
     if "messages" not in st.session_state:
         st.session_state.messages = st.session_state.assistant.messages
     
