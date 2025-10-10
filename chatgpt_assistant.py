@@ -9,12 +9,17 @@ class ChatGPTAssistant:
         pass
 
     def process_data(self, data):
-        response = client.chat.completions.create(model="gpt-4-turbo",
-        messages=[
-            #{"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": data}])
-        return response.choices[0].message.content.strip()
+        response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+                # You can uncomment this if you want the assistant to act more naturally
+                # {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": data}
+            ]
+        )
+        # ✅ FIX: `response.choices[0].message.content` → correct attribute access
+        return response.choices[0].message["content"].strip()
 
     def send_data(self, data):
         processed_data = self.process_data(data)
-        print(f"This is your return from ChatGPT.: {processed_data}")
+        print(f"This is your return from ChatGPT: {processed_data}")
