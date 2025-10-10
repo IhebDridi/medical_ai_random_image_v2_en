@@ -6,20 +6,28 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 class ChatGPTAssistant:
     def __init__(self):
-        pass
+        # ✅ store chat history (so assistant knows prior messages)
+        self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
 
     def process_data(self, data):
+        # ✅ add user message to conversation
+        self.messages.append({"role": "user", "content": data})
+
         response = client.chat.completions.create(
             model="gpt-4-turbo",
-            messages=[
-                # You can uncomment this if you want the assistant to act more naturally
-                # {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": data}
-            ]
+            messages=self.messages
         )
-        # ✅ FIX: `response.choices[0].message.content` → correct attribute access
-        return response.choices[0].message["content"].strip()
+
+        reply = response.choices[0].message.content.strip()
+
+        # ✅ add assistant reply to memory
+        self.messages.append({"role": "assistant", "content": reply})
+        return reply
 
     def send_data(self, data):
         processed_data = self.process_data(data)
         print(f"This is your return from ChatGPT: {processed_data}")
+
+    def chat(self, data):
+        # ✅ alias for process_data (used by chat.py)
+        return self.process_data(data)
