@@ -6,28 +6,46 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 class ChatGPTAssistant:
     def __init__(self):
-        # ✅ store chat history (so assistant knows prior messages)
+        # keep memory for context
         self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
+        print("[DEBUG] Assistant initialized")
 
     def process_data(self, data):
-        # ✅ add user message to conversation
+        print("\n[DEBUG] process_data() called with data:", data)
+
+        # add user message
         self.messages.append({"role": "user", "content": data})
+        print("[DEBUG] Messages before sending to API:")
+        for m in self.messages:
+            print("   ", m)
 
-        response = client.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=self.messages
-        )
+        try:
+            response = client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=self.messages
+            )
 
-        reply = response.choices[0].message.content.strip()
+            reply = response.choices[0].message.content.strip()
+            print("[DEBUG] Raw API reply:", repr(reply))
 
-        # ✅ add assistant reply to memory
-        self.messages.append({"role": "assistant", "content": reply})
-        return reply
+            # add assistant reply to chat memory
+            self.messages.append({"role": "assistant", "content": reply})
+
+            print("[DEBUG] Updated messages after API call:")
+            for m in self.messages:
+                print("   ", m)
+
+            return reply
+
+        except Exception as e:
+            print("[ERROR] Exception during API call:", e)
+            return "failed"
 
     def send_data(self, data):
+        print("[DEBUG] send_data() called")
         processed_data = self.process_data(data)
-        print(f"This is your return from ChatGPT: {processed_data}")
+        print(f"[DEBUG] This is your return from ChatGPT: {processed_data}")
 
     def chat(self, data):
-        # ✅ alias for process_data (used by chat.py)
+        print("[DEBUG] chat() called with:", data)
         return self.process_data(data)
