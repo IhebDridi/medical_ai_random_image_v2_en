@@ -92,9 +92,18 @@ class XAIAssistant:
         self._create_message("user", msg)
         run = self._create_run()
 
-        while not run.status == 'completed':
+        while run.status not in ["completed", "failed", "cancelled"]:
             time.sleep(1)
-            print(run.status)
+            run = self.client.beta.threads.runs.retrieve(
+                thread_id=self.thread.id,
+                run_id=run.id
+            )
+            print(f"Run status: {run.status}")
+
+        if run.status == "failed":
+            print("❌ Run failed — here’s the error info:")
+            print(run.last_error)
+
 
         return self._handle_run_completed(run)
 
