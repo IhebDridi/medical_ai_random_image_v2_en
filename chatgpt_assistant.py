@@ -12,7 +12,7 @@ class ChatGPTAssistant:
         response = client.chat.completions.create(model="gpt-4-turbo",
         messages=[
             #{"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": f"Please return the following text exactly as it is: {data}"}])
+            {"role": "user", "content": data}])
         return response.choices[0].message.content.strip()
 
     def send_data(self, data):
